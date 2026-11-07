@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Faisal · CRT Desk</title>
+    <meta name="description" content="Faisal D. Khan, full-stack developer in Baguio City. A cozy CRT entrance into a 3D desk portfolio." />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/desk/cards.css" />
+  </head>
+  <body>
+    <div id="stage" aria-hidden="true"></div>
+    <button id="hint" class="hint" type="button">click the screen to enter ↵</button>
+    <button id="mute" class="mute" type="button" aria-pressed="false">sound: on</button>
+    <button id="tilt" class="mute tilt" type="button" hidden>enable tilt</button>
+
+    <!-- Keyboard / screen-reader route to everything on the desk (visible on focus). -->
+    <nav id="desk-nav" aria-label="Desk">
+      <button type="button" data-open="notebook">About</button>
+      <button type="button" data-open="project" data-index="0">Project: Zer0ed</button>
+      <button type="button" data-open="project" data-index="1">Project: Ruta</button>
+      <button type="button" data-open="project" data-index="2">Project: Portfolio</button>
+      <button type="button" data-open="clipboard">Experience</button>
+      <button type="button" data-open="sticky">Contact</button>
+      <button type="button" data-open="cv">Resume</button>
+      <button type="button" data-open="leave">Leave (power off)</button>
+    </nav>
+
+    <div id="cards"></div>
+    <div id="mug-note" role="status" hidden></div>
+    <div id="prism" aria-hidden="true"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

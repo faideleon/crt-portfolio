@@ -1,0 +1,239 @@
+:root {
+  --paper: #fbf7ee;
+  --teal: #5e8f8a;
+  --deep: #2f5d5a;
+  --pale: #a9c9c2;
+  --coral: #e8735a;
+  --mustard: #e9b949;
+  --sticky: #f3d36b;
+  --hand: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+}
+
+/* ---------- reading-card layer ---------- */
+#cards {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+#cards::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 12, 8, 0.45);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+#cards.active { pointer-events: auto; }
+#cards.active::before { opacity: 1; }
+
+.card-ghost { position: fixed; }
+
+.card {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  font: 14px/1.6 var(--font);
+  border-radius: 6px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 2px 0 rgba(0, 0, 0, 0.1);
+  padding: 28px 32px;
+  pointer-events: auto;
+  overflow: hidden;
+}
+.card h2 { margin: 0 0 4px; font-size: 26px; line-height: 1.15; }
+.card h3 { margin: 0 0 6px; font-size: 17px; }
+.card h3 span { font-weight: 400; color: #7a6c5e; }
+.card p { margin: 0 0 10px; }
+.card a { color: var(--deep); font-weight: 700; text-underline-offset: 3px; }
+.card ol { margin: 8px 0 0; padding-left: 20px; }
+.card li { margin: 2px 0; }
+.card .kicker { margin: 0 0 4px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--coral); font-weight: 700; }
+.card-scroll { overflow: auto; overscroll-behavior: contain; min-height: 0; flex: 1; }
+
+.card-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 3;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--ink);
+  font: 700 18px/1 var(--font);
+  cursor: pointer;
+}
+.card-close:hover, .card-close:focus-visible { background: var(--ink); color: var(--paper); outline: none; }
+
+.stickers { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.stickers span {
+  padding: 3px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--mustard);
+  font-weight: 700;
+  font-size: 12px;
+  rotate: var(--r, 0deg);
+}
+.stickers span:nth-child(5n + 2) { background: var(--coral); }
+.stickers span:nth-child(5n + 3) { background: var(--pale); }
+.stickers span:nth-child(5n + 4) { background: #fff; }
+.stickers span:nth-child(5n + 5) { background: var(--sticky); }
+
+/* ---------- About: notebook spread ---------- */
+.card-about { padding: 0; background: #f4ecd9; }
+.spread { display: grid; grid-template-columns: 0.8fr 1.2fr; min-height: 100%; }
+.page { padding: 34px 30px; }
+.page-left {
+  background: var(--deep);
+  color: #f6ecd6;
+  box-shadow: inset -14px 0 18px -12px rgba(0, 0, 0, 0.5);
+}
+.page-right {
+  background: repeating-linear-gradient(transparent 0 25px, rgba(47, 93, 90, 0.18) 25px 26px), #fbf7ee;
+  background-position: 0 14px;
+}
+.photo { width: 100%; max-width: 230px; display: block; image-rendering: pixelated; border: 6px solid #fbf7ee; rotate: -2deg; box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35); }
+.place { margin-top: 18px !important; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--mustard); color: var(--ink); font-weight: 700; font-size: 12px; }
+.badge::first-letter { color: #2e8b57; }
+.role { color: var(--coral); font-weight: 700; }
+
+/* ---------- Experience: clipboard ---------- */
+.card-experience { background: var(--paper); border-top: 18px solid #9b6b43; padding-top: 34px; }
+.clip { position: absolute; top: -12px; left: 50%; translate: -50% 0; width: 140px; height: 30px; border-radius: 8px; background: linear-gradient(#d6d6d0, #9d9d97); box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2); }
+.role-block { padding: 14px 0; border-top: 1px dashed #cdbfa4; }
+.role-block:first-of-type { border-top: 0; }
+
+/* ---------- Contact: big sticky note ---------- */
+.card-contact { width: min(440px, calc(100vw - 32px)); background: var(--sticky); border-radius: 2px; rotate: -1.5deg; font-family: var(--hand), var(--font); }
+.card-contact h2 { font-size: 34px; }
+.email-row { position: relative; margin: 6px 0 14px; }
+.copy-email {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px dashed var(--ink);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--ink);
+  font: 700 16px/1.3 var(--font);
+  text-align: left;
+  cursor: pointer;
+}
+.copy-email small { display: block; font-weight: 400; font-size: 11px; opacity: 0.7; }
+.copy-email:hover, .copy-email:focus-visible { background: rgba(255, 255, 255, 0.6); outline: none; }
+.stamp {
+  position: absolute;
+  right: 10px;
+  top: -14px;
+  padding: 2px 10px;
+  border: 3px solid var(--coral);
+  color: var(--coral);
+  font: 800 18px/1.2 var(--font);
+  letter-spacing: 0.15em;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- Resume: folded paper ---------- */
+.card-resume { width: min(460px, calc(100vw - 32px)); background: linear-gradient(#f7f1e3 49.7%, #e9e1cf 50%, #f7f1e3 50.6%); }
+
+/* ---------- Project: polaroid (front / back) ---------- */
+.card-project { width: min(560px, calc(100vw - 32px)); padding: 0; background: transparent; box-shadow: none; overflow: visible; perspective: 1400px; }
+.pol-flipper { position: relative; width: 100%; transform-style: preserve-3d; }
+.pol-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px 16px;
+  background: var(--paper);
+  border-radius: 4px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+  backface-visibility: hidden;
+}
+.pol-front { position: relative; }
+.pol-back { transform: rotateY(180deg); padding-top: 28px; }
+.pol-photo { position: relative; aspect-ratio: 420 / 263; max-height: 52dvh; background: var(--ink); }
+.pol-img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; display: block; }
+.pol-prev, .pol-next {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 38px;
+  height: 38px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--ink);
+  font: 700 22px/1 var(--font);
+  cursor: pointer;
+}
+.pol-prev { left: 10px; }
+.pol-next { right: 10px; }
+.pol-title { margin: 14px 0 2px !important; font: 700 30px/1.1 var(--hand), var(--font); text-align: center; }
+.pol-caption { min-height: 2.8em; text-align: center; color: #6d6052; font-size: 13px; }
+.pol-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 12px; color: #7a6c5e; }
+.pol-flip { padding: 6px 14px; border: 2px solid var(--ink); border-radius: 999px; background: var(--mustard); color: var(--ink); font: 700 12px/1 var(--font); cursor: pointer; }
+.pol-flip:hover, .pol-prev:hover, .pol-next:hover { background: var(--ink); color: var(--paper); }
+.stats { display: flex; gap: 10px; margin: 12px 0 6px; }
+.stats div { flex: 1; padding: 10px 12px; border: 2px solid var(--ink); border-radius: 6px; background: #fff; }
+.stats b { display: block; font-size: 22px; line-height: 1.1; color: var(--deep); }
+.stats span { font-size: 11px; color: #7a6c5e; }
+
+/* ---------- mug note ---------- */
+#mug-note {
+  position: fixed;
+  z-index: 40;
+  max-width: 260px;
+  padding: 10px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 13px/1.45 var(--font);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+#mug-note a { color: var(--deep); font-weight: 700; }
+#mug-note small { display: block; margin-top: 4px; font-size: 11px; color: #7a6c5e; }
+
+/* ---------- keyboard nav ---------- */
+#desk-nav {
+  position: fixed;
+  left: 12px;
+  top: 12px;
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+}
+body.inside #desk-nav { display: flex; }
+#desk-nav button {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  padding: 6px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  background: var(--paper);
+  font: 12px var(--font);
+}
+#desk-nav:focus-within button { position: static; opacity: 1; pointer-events: auto; }
+
+/* ---------- phones ---------- */
+@media (max-width: 600px) {
+  .card { padding: 24px 18px; }
+  .spread { grid-template-columns: 1fr; }
+  .page { padding: 26px 20px; }
+  .photo { max-width: 160px; }
+  .card h2 { font-size: 22px; }
+}
